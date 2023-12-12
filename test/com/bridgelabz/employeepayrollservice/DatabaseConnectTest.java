@@ -2,6 +2,9 @@ package com.bridgelabz.employeepayrollservice;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import static org.junit.Assert.assertNotNull;
 
 
@@ -12,7 +15,7 @@ public class DatabaseConnectTest {
      it should not return , it should return connection
      */
     @Test
-    public void getMysqlConnectionItShouldNotReturnNull() {
+    public void getMysqlConnectionItShouldNotReturnNull() throws IOException, SQLException {
         assertNotNull(DatabaseConnect.getMysqlConnection());
     }
 }
