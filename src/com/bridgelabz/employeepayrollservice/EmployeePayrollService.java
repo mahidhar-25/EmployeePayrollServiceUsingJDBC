@@ -203,4 +203,31 @@ public class EmployeePayrollService {
         }
         return employeePayrollDataArrayList1;
     }
+
+    /*
+    @desc : this method will calculate the avg , min , max salries and group them by gender
+    @param : no param
+    @return : int - no of rows returned
+     */
+    public int getEmployeePayrollDetailsGroupByGender() {
+        int count=0;
+        String sqlQuery = "SELECT \n" +
+                "gender ,\n" +
+                "COUNT(employeeId) AS count, \n" +
+                "SUM(employeeSalary) AS totalSum , \n" +
+                "AVG(employeeSalary) AS average , \n" +
+                "MAX(employeeSalary) AS maxSalary,\n" +
+                "MIN(employeeSalary) AS minSalary \n" +
+                "FROM employee_payroll GROUP BY gender;";
+        try(Connection connection = DatabaseConnect.getMysqlConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while(resultSet.next()){
+                count++;
+            }
+        }catch (SQLException | IOException e){
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

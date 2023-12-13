@@ -20,7 +20,7 @@ public class EmployeePayrollServiceTest {
     @Test
     public void readEmployeeDetails_FromJavaProgramAnd_CountShouldMatchWithEmployeeCount() {
         ArrayList<EmployeePayrollData> employeeData = employeePayrollService.readEmployeeDetails();
-        assertEquals(3 , employeeData.size());
+        assertEquals(6 , employeeData.size());
     }
 
     /*
@@ -50,6 +50,12 @@ public class EmployeePayrollServiceTest {
         LocalDate startDate = LocalDate.of(2022 , 01 , 01);
         LocalDate endDate = LocalDate.now();
         ArrayList<EmployeePayrollData> employeePayrollDataArrayList = employeePayrollService.getEmployeeDetailsWhoJoinedBetweenDates(startDate , endDate);
-    assertEquals(2 , employeePayrollDataArrayList.size());
+        assertEquals( 4, employeePayrollDataArrayList.size());
+    }
+
+    @Test
+    public void getEmployeePayrollDetailsGroupingByGender(){
+        int count = employeePayrollService.getEmployeePayrollDetailsGroupByGender();
+        assertEquals(2 , count);
     }
 }
