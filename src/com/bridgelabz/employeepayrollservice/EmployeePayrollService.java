@@ -24,13 +24,8 @@ public class EmployeePayrollService {
  */
     public ArrayList<EmployeePayrollData> readEmployeeDetails(){
         String sqlQuery = "SELECT * FROM employee_payroll";
-        try(Connection connection = DatabaseConnect.getMysqlConnection()){
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
-            employeePayrollDataArrayList = this.getEmployeePayrollData(resultSet);
-        }catch (SQLException | IOException e){
-            e.printStackTrace();
-        }
+        employeePayrollDataArrayList = this.runTheSqlQueryAndGiveTheResult(sqlQuery);
+
         return employeePayrollDataArrayList;
     }
 
@@ -120,6 +115,20 @@ public class EmployeePayrollService {
     }
 
     /*
+    @desc : preparedStatementToGetEmployeeByName it is a prepared statement for getting all the details by name
+    @params : Connection - connection
+    @return : void
+     */
+    public void preparedStatementToGetEmployeesByDate(Connection connection) throws IOException {
+        try {
+            String sqlQuery = "SELECT * FROM employee_payroll WHERE startDate BETWEEN CAST(? AS DATE) AND ?";
+            employeePayrollDataStatementByName = connection.prepareStatement(sqlQuery);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*
     @desc : just iterate through all the columns of the table once we got the result set
     @params : Resultset - resultset
     @return : ArrayList<EmployeePayrollData> - array of rows
@@ -164,5 +173,34 @@ public class EmployeePayrollService {
 
     }
 
+    /*
+    @desc : getEmployeeDetailsWhoJoinedBetweenDates it runs the queryu to findout who joined between dates
+    @params : LocalDate - startDate
+              LocalDate - endDate
+    @return : ArrayList<EmployeePayrollData>
+     */
 
+    public ArrayList<EmployeePayrollData> getEmployeeDetailsWhoJoinedBetweenDates(LocalDate startDate, LocalDate endDate) {
+        String sqlQuery  = String.format("SELECT * FROM employee_payroll WHERE startDate BETWEEN '%s' AND '%s';" ,
+                 Date.valueOf(startDate) , Date.valueOf(endDate));
+
+        return this.runTheSqlQueryAndGiveTheResult(sqlQuery);
+    }
+
+    /*
+    @desc : it runs the query given and return the result
+    @params : String - sqlQuery
+    @return : ArrayList<EmployeePayrollData>
+     */
+    private ArrayList<EmployeePayrollData> runTheSqlQueryAndGiveTheResult(String sqlQuery) {
+        ArrayList<EmployeePayrollData> employeePayrollDataArrayList1 = null;
+        try(Connection connection = DatabaseConnect.getMysqlConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            employeePayrollDataArrayList1 = this.getEmployeePayrollData(resultSet);
+        }catch (SQLException | IOException e){
+            e.printStackTrace();
+        }
+        return employeePayrollDataArrayList1;
+    }
 }

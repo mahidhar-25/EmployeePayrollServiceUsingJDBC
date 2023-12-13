@@ -3,6 +3,7 @@ package com.bridgelabz.employeepayrollservice;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -39,5 +40,16 @@ public class EmployeePayrollServiceTest {
         employeePayrollService.updateEmployeeSalaryInDatabaseUsingPreparedStatement("Karthik" , 30000);
         boolean isDataInSync = employeePayrollService.checkEmployeePayrollIsInSyncWithDatabase("Karthik");
         assertTrue(isDataInSync);
+    }
+    /*
+    @desc : to get the employees who join in specific dates
+     */
+
+    @Test
+    public void getEmployeeDetailsBetweenDatesWhoJoinedAndCheckWithOurLocalMemory(){
+        LocalDate startDate = LocalDate.of(2022 , 01 , 01);
+        LocalDate endDate = LocalDate.now();
+        ArrayList<EmployeePayrollData> employeePayrollDataArrayList = employeePayrollService.getEmployeeDetailsWhoJoinedBetweenDates(startDate , endDate);
+    assertEquals(2 , employeePayrollDataArrayList.size());
     }
 }
