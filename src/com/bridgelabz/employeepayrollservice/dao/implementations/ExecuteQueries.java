@@ -4,6 +4,7 @@ import com.bridgelabz.employeepayrollservice.database.DatabaseConnect;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 /*
@@ -30,5 +31,21 @@ public class ExecuteQueries {
         return isDatabaseUpdated;
     }
 
+
+    public void executeQueryToGetSumOfSalaryGroupByGender(String sqlQuery){
+        try(Connection connection = DatabaseConnect.getMysqlConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while(resultSet.next()){
+               String gender = resultSet.getString("employeeGender");
+               Double salarySum = resultSet.getDouble("SUM(payroll.netPay)");
+               String companyId = resultSet.getString("companyId");
+               String companyName = resultSet.getString("companyName");
+               System.out.println("Gender : " + gender + ", salarySum : "+ salarySum + ", companyId : "+companyId+", companyName : "+companyName);
+            }
+        } catch (IOException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
