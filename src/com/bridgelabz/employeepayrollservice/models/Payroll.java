@@ -169,4 +169,16 @@ public class Payroll {
         setEmployeeId(providedPayroll.getEmployeeId());
         setTaxablePay(providedPayroll.getTaxablePay());
     }
+
+    @Override
+    public String toString() {
+        return "Payroll{" +
+                "employeeId='" + employeeId + '\'' +
+                ", basicPay=" + basicPay +
+                ", deductions=" + deductions +
+                ", taxablePay=" + taxablePay +
+                ", tax=" + tax +
+                ", netPay=" + netPay +
+                '}';
+    }
 }

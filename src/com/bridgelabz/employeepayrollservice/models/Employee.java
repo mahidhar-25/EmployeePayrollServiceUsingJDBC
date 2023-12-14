@@ -134,4 +134,15 @@ public class Employee {
         this.setEmployeeName(providedEmployee.getEmployeeName());
         this.setEmployeePhoneNo(providedEmployee.getEmployeePhoneNo());
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId='" + employeeId + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeePhoneNo='" + employeePhoneNo + '\'' +
+                ", employeeGender='" + employeeGender + '\'' +
+                ", companyId='" + companyId + '\'' +
+                '}';
+    }
 }

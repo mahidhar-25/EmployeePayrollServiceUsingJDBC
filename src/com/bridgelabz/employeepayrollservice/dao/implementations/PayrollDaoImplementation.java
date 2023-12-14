@@ -15,7 +15,11 @@ import java.util.ArrayList;
  */
 public class PayrollDaoImplementation implements PayrollDaoInterface {
     // Collection to store all Payroll objects locally
-    public static ArrayList<Payroll> allPayrolls;
+    public  ArrayList<Payroll> allPayrolls;
+    public PayrollDaoImplementation() throws SQLException, IOException {
+        allPayrolls = new ArrayList<>();
+        this.allPayrolls = getAllEmployeePayrolls();
+    }
 
     /*
      * @desc Inserts a new Payroll entry into the data store.
