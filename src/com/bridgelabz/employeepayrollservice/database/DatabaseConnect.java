@@ -1,4 +1,4 @@
-package com.bridgelabz.employeepayrollservice;
+package com.bridgelabz.employeepayrollservice.database;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,6 @@ public class DatabaseConnect {
         if(mysqlConnection == null || mysqlConnection.isClosed()){
             return connectToNewMysqlDatabase();
         }else{
-            System.out.println("Already connected");
             return mysqlConnection;
         }
     }
@@ -45,13 +44,12 @@ public class DatabaseConnect {
     @return : Connection - new mysql connection
      */
     public static Connection connectToNewMysqlDatabase() throws IOException {
-        FileInputStream propertiesFile = new FileInputStream(new File("DatabaseConfig.properties"));
+        FileInputStream propertiesFile = new FileInputStream(new File("properties/DatabaseConfig.properties"));
         Properties prop = new Properties();
         prop.load(propertiesFile);
         Connection connection = null;
         try{
             connection = DriverManager.getConnection(prop.getProperty("DATABASE_URL") , prop.getProperty("USERNAME") , prop.getProperty("PASSWORD"));
-            System.out.println("connection : " + connection);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

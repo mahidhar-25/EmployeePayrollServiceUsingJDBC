@@ -1,4 +1,6 @@
-package com.bridgelabz.employeepayrollservice;
+package com.bridgelabz.employeepayrollservice.employeepayroll;
+
+import com.bridgelabz.employeepayrollservice.database.DatabaseConnect;
 
 import java.io.IOException;
 import java.sql.*;

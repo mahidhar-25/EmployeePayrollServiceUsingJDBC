@@ -1,5 +1,7 @@
-package com.bridgelabz.employeepayrollservice;
+package com.bridgelabz.employeepayrollservice.employeepayroll;
 
+import com.bridgelabz.employeepayrollservice.employeepayroll.EmployeePayrollData;
+import com.bridgelabz.employeepayrollservice.employeepayroll.EmployeePayrollService;
 import org.junit.Before;
 import org.junit.Test;
 

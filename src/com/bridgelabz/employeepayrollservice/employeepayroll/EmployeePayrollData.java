@@ -1,4 +1,4 @@
-package com.bridgelabz.employeepayrollservice;
+package com.bridgelabz.employeepayrollservice.employeepayroll;
 
 import java.time.LocalDate;
 import java.util.Scanner;

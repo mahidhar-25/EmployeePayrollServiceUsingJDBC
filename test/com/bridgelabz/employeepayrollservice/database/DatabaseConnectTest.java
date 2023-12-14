@@ -1,4 +1,4 @@
-package com.bridgelabz.employeepayrollservice;
+package com.bridgelabz.employeepayrollservice.database;
 
 import org.junit.Test;
 
